@@ -1,0 +1,30 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aleohq/nodejs": "file:aleo/wasm/pkg",
+    "@aleohq/sdk": "file:aleo/sdk",
+    "axios": "^1.4.0",
+    "copy-webpack-plugin": "^10.2.0",
+    "i": "^0.3.7",
+    "long": "^5.2.3",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "wasm_game": "file:../pkg",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.7.3"
+  }
+}

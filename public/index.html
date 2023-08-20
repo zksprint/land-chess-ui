@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8">
+	<title>Land Battle Chess</title>
+	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+	<style>
+    .login-container {
+      max-width: 400px;
+      margin: 0 auto;
+			margin-top: 100px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box; /* 添加此样式 */
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-group button:hover {
+      background-color: #45a049;
+    }
+
+		.Board {
+			background: url("./images/board.jpg");
+			background-repeat: no-repeat;
+			text-align: center;
+			padding-left: 0;
+			padding-right: 0;
+			float: left;
+		}
+
+		.board_container {
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			width: 650px;
+		}
+
+		.ChessList {
+			background: url("./images/Luzhanqi_chinese_army_chess_board.jpg");
+			margin: 10px;
+		}
+
+		body {
+			background: url("./images/BackDrop.webp");
+		}
+
+		.ctrl_panel {
+			width: 180px;
+			height: 555px;
+			display: inline;
+			float: right;
+			text-align: center;
+		}
+
+		.loading {
+			width: 30px;
+			height: 30px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid #3498db;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			position: absolute;
+			top: 30%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 9999;
+			display: none;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+			100% {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+
+
+		.button {
+			display: inline-block;
+			-moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
+			-webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;
+			box-shadow: inset 0px 1px 0px 0px #dcecfb;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea));
+			background: -moz-linear-gradient(center top, #bddbfa 5%, #80b5ea 100%);
+			filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea');
+			background-color: #bddbfa;
+			-webkit-border-top-left-radius: 0px;
+			-moz-border-radius-topleft: 0px;
+			border-top-left-radius: 0px;
+			-webkit-border-top-right-radius: 0px;
+			-moz-border-radius-topright: 0px;
+			border-top-right-radius: 0px;
+			-webkit-border-bottom-right-radius: 0px;
+			-moz-border-radius-bottomright: 0px;
+			border-bottom-right-radius: 0px;
+			-webkit-border-bottom-left-radius: 0px;
+			-moz-border-radius-bottomleft: 0px;
+			border-bottom-left-radius: 0px;
+			text-indent: 0;
+			border: 2px solid #84bbf3;
+			display: inline-block;
+			color: #ffffff;
+			font-family: Arial;
+			font-size: 15px;
+			font-weight: bold;
+			font-style: normal;
+			height: 40px;
+			line-height: 40px;
+			width: 100px;
+			text-decoration: none;
+			text-align: center;
+			text-shadow: 1px 1px 0px #528ecc;
+			margin: 5px;
+
+			&:hover {
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa));
+				background: -moz-linear-gradient(center top, #80b5ea 5%, #bddbfa 100%);
+				filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa');
+				background-color: #80b5ea;
+			}
+
+			&:active {
+				position: relative;
+				top: 1px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="login-container"  id="login-container">
+    <h2>进入游戏</h2>
+    <div class="form-group">
+      <label for="room_code">房间码</label>
+      <input type="text" id="room_code" placeholder="请输入房间码">
+    </div>
+		<div id="loading" class="loading"></div>
+    <div class="form-group">
+      <label for="private_key">私钥</label>
+      <input type="password" id="private_key" placeholder="请输入私钥">
+    </div>
+    <div class="form-group">
+      <button id="login_button">登录</button>
+    </div>
+
+  </div>
+
+	<div id="board_container" class="board_container" style="display: none;" >
+		<canvas id="Board" class="Board" width="469" height="650"></canvas>
+		<div id="ctrl_panel" class="ctrl_panel">
+			<div style="margin: 150px 0 0 0 ">
+				<div style="visibility:hidden" id="timerShow">
+					<div id="showMessage" style="color: #282928; font-size: 120%;">等待对方准备</div>
+					<!-- <input type="number" name="timer" id="timer" min="0" max="120" value="60"
+						style="width: 70px; height: 35px;font-size:24px;" /> -->
+				</div>
+				<a href="#" class="button" id="start_button">READY</a>
+				<a href="#" class="button" id="stop_button" style="visibility:hidden">STOP</a>
+				<div>
+					<input type="checkbox" name="debug" id="debug" value="debug">
+					<spin style="color:orange">Debug</spin>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./bootstrap.js"></script>
+</body>
+
+</html>
